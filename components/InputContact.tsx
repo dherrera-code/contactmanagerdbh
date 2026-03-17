@@ -11,20 +11,19 @@ const InputContact = () => {
             <form className="flex max-w-sm flex-col gap-4">
                 <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="text">
-                            Name</Label>
+                        <Label>Name</Label>
                     </div>
                     <TextInput id="name" type="text" required />
                 </div>
                 <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="email">Email</Label>
+                        <Label>Email</Label>
                     </div>
                     <TextInput id="email1" type="email" placeholder="john.doe@example.com" required />
                 </div>
                 <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="phone">Phone</Label>
+                        <Label >Phone</Label>
                     </div>
                     <TextInput id="password1" type="phone number" required />
                 </div>
