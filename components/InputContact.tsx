@@ -1,29 +1,39 @@
 'use client'
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react'
+import { Button, Card, Checkbox, Label, TextInput } from 'flowbite-react'
 import React from 'react'
 
 const InputContact = () => {
-  return (
-    <form className="flex max-w-md flex-col gap-4">
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="email1">Your email</Label>
-        </div>
-        <TextInput id="email1" type="email" placeholder="name@flowbite.com" required />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="password1">Your password</Label>
-        </div>
-        <TextInput id="password1" type="password" required />
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="remember" />
-        <Label htmlFor="remember">Remember me</Label>
-      </div>
-      <Button type="submit">Submit</Button>
-    </form>
-  )
+    return (
+        <Card className='max-w-md'>
+
+            <h1 className='font-bold text-xl'>Add New Contact</h1>
+
+            <form className="flex max-w-sm flex-col gap-4">
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="text">
+                            Name</Label>
+                    </div>
+                    <TextInput id="name" type="text" required />
+                </div>
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="email">Email</Label>
+                    </div>
+                    <TextInput id="email1" type="email" placeholder="john.doe@example.com" required />
+                </div>
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="phone">Phone</Label>
+                    </div>
+                    <TextInput id="password1" type="phone number" required />
+                </div>
+                
+                <Button type="submit">+   Add Contact</Button>
+            </form>
+
+        </Card>
+    )
 }
 
 export default InputContact
