@@ -9,3 +9,17 @@ export interface ContactInfoContextType {
     contact: ContactInfo | null;
     setContact : (contact : ContactInfo | null) => void 
 }
+export interface Token {
+    token: string
+}
+
+export interface CreateUser {
+    username: string,
+    email: string,
+    password: string
+}
+
+export interface Login {
+    loginParams: string,
+    password: string
+}

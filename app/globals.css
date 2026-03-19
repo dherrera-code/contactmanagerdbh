@@ -31,4 +31,13 @@ body {
   color: #3B82F6;
   border-bottom: 2px solid;
 }
+.a-tag{
+  color: #3B82F6;
+}
+.a-tag:hover{
+  color:#2876f3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 
