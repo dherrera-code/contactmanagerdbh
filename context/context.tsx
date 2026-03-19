@@ -6,9 +6,10 @@ const ContactContext = createContext<ContactInfoContextType | undefined>(undefin
 
 export function ContactProvider({children} : {children: ReactNode}){
     const [contact, setContact] = useState<ContactInfo | null>(null);
+    // const [searchContact, setSearchContact] = useState<ContactInfo | null>(null)
 
     return (
-        <ContactContext.Provider value={{ contact, setContact}}>
+        <ContactContext.Provider value={{ contact, setContact,}}>
             {children}
         </ContactContext.Provider>
     )
@@ -16,6 +17,7 @@ export function ContactProvider({children} : {children: ReactNode}){
 
 export function useContacts() {
     const context = useContext(ContactContext);
+    // const searchContacts = useContext(ContactContext)
     
     if(context=== undefined){
         throw new Error("Oops!");

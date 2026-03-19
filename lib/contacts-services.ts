@@ -22,6 +22,27 @@ export const getContacts = async (token: string) => {
     return data;
 }
 
+export const getContactByName = async (name: string ,token: string) => {
+    const response = await fetch(url + `GetContact/${name}`,{
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + token
+        }
+    });
+
+    if(!response.ok) {
+        const data = await response.json()
+        const message = data.message;
+        console.log(message);
+        return [];
+    }
+
+    const data = await response.json();
+    return data;
+
+}
+
 export const createContactItem = async (contact: ContactInfo, token: string) => {
     const response = await fetch(url + "CreateContact", {
         method: "POST",
