@@ -1,7 +1,7 @@
 export interface ContactInfo {
-    Name: string,
-    Email: string,
-    Phone: string
+    name: string,
+    email: string,
+    phoneNumber: string
 }
 
 // this will be our interface for our wrapper provider!
