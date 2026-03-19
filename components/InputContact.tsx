@@ -22,12 +22,9 @@ const InputContact = () => {
         }
         let result = false;
         result = await createContactItem(contact, getToken())
-        if(result) {
-            alert("Contact added")
-        }
-        else(
+        if(!result) {
             alert("contact not added")
-        )
+        }
 
     }
         

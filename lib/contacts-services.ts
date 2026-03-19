@@ -63,3 +63,26 @@ export const createContactItem = async (contact: ContactInfo, token: string) => 
     const data = await response.json();
     return data;
 }
+
+export const removeContactItem = async (contact: ContactInfo, token: string) => {
+    const response = await fetch(url + `DeleteContact`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer " + token
+        },
+        body: JSON.stringify(contact)
+    })
+
+    if(!response.json())
+    {
+        const data = await response.json();
+        const message = data.message;
+        console.log(message);
+        return false;
+    }
+    console.log(response)
+    // const data = await response.ok
+    return response.ok;
+
+}

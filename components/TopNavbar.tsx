@@ -24,7 +24,10 @@ const TopNavbar = () => {
         
         console.log(name + " : " + contactFound);
         if(contactFound != null) setContact(contactFound);
-        else setContact(null);
+        else {
+            setContact(null);
+
+        }
         console.log(contactFound)
         console.log(contactFound.name)
 
