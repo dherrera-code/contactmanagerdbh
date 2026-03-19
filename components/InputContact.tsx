@@ -1,10 +1,9 @@
 'use client'
-import { getAllContacts } from '@/dataservices/dataservices'
 import { ContactInfo } from '@/interfaces/interface'
 import { createContactItem } from '@/lib/contacts-services'
 import { getToken } from '@/lib/user-services'
-import { Button, Card, Checkbox, Label, TextInput } from 'flowbite-react'
-import React, { useEffect, useState } from 'react'
+import { Button, Card, Label, TextInput } from 'flowbite-react'
+import React, { useState } from 'react'
 
 const InputContact = () => {
     // console.log("Input component rendering!")
