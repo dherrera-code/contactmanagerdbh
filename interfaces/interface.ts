@@ -20,6 +20,6 @@ export interface CreateUser {
 }
 
 export interface Login {
-    loginParams: string,
+    loginParam: string,
     password: string
 }

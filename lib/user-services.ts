@@ -30,9 +30,10 @@ export const login = async (user: Login) => {
         },
         body: JSON.stringify(user)
     });
-    
+    console.log(response);
     if(!response.ok){
         const data = await response.json();
+        console.log(await data)
         const message = data.message;
         alert(message);
         return null;

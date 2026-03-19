@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import TopNavbar from "@/components/TopNavbar";
 import { ContactProvider } from "@/context/context";
 
@@ -25,15 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
+      <div
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ContactProvider>
-          <TopNavbar />
+        <TopNavbar />
           {children}
         </ContactProvider>
-      </body>
-    </html>
+      </div>
   );
 }
