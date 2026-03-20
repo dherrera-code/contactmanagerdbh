@@ -1,6 +1,6 @@
 "use client"
 import { useContacts } from '@/context/context'
-import { ContactInfo } from '@/interfaces/interface'
+import { ContactModel } from '@/interfaces/interface'
 import { getContactByName } from '@/lib/contacts-services'
 import { getToken } from '@/lib/user-services'
 import { Navbar, NavbarBrand, NavbarToggle, NavbarCollapse, } from 'flowbite-react'
@@ -20,7 +20,7 @@ const TopNavbar = () => {
     }
 
     const handleSearch = async () => {
-        const contactFound: ContactInfo = await getContactByName(name, getToken())
+        const contactFound: ContactModel = await getContactByName(name, getToken())
         
         console.log(name + " : " + contactFound);
         if(contactFound != null) setContact(contactFound);

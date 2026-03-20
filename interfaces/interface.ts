@@ -3,12 +3,29 @@ export interface ContactInfo {
     email: string,
     phoneNumber: string
 }
+export interface ContactModel {
+    id: number,
+    name: string,
+    email: string,
+    phoneNumber: string
+}
 
 // this will be our interface for our wrapper provider!
 export interface ContactInfoContextType {
-    contact: ContactInfo | null;
-    setContact : (contact : ContactInfo | null) => void 
+    contact: ContactModel | null;
+    setContact : (contact : ContactModel | null) => void 
 }
+
+export interface UpdateContactContextType {
+    updateContact: ContactModel | null;
+    setUpdateContact : (contact : ContactModel | null) => void 
+}
+
+export interface UpdateBooleanContextType {
+    isUpdate: boolean | null;
+    setIsUpdate: (isUpdate: boolean | null) => void
+}
+
 export interface Token {
     token: string
 }

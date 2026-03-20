@@ -20,10 +20,13 @@ Components needed:
 Next Steps to complete project:
 When website boots up, Display all already created contacts!
 
-3. Add function to Update contact! (When user clicks on update, the Add new contact text will change to Update contact and button will update contact and display in the box under contact list!)
-4. Make the delete button functional!
 
 Contact Manager
 Login function created, getAllContacts, createNewContacts implemented! 
 I need to add functionality towards searching for one contact, removing and updating contact!
 
+Login Function: 
+
+Add input validation to login page!
+Add css class function to add border red color to password!
+Add toast notification to tell user account was created!

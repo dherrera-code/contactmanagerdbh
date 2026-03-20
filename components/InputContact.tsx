@@ -1,36 +1,58 @@
 'use client'
-import { ContactInfo } from '@/interfaces/interface'
-import { createContactItem } from '@/lib/contacts-services'
+import { useIsUpdateBool, useUpdateContact } from '@/context/context'
+import { ContactInfo, ContactModel } from '@/interfaces/interface'
+import { createContactItem, updateContactItem } from '@/lib/contacts-services'
 import { getToken } from '@/lib/user-services'
 import { Button, Card, Label, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 
 const InputContact = () => {
     // console.log("Input component rendering!")
+    
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     
+    const {isUpdate} = useIsUpdateBool();
+    const {updateContact, setUpdateContact} = useUpdateContact();
 
 
-    const handleCreateContact = async () => {
+    const handleSubmit = async () => {
         const contact: ContactInfo = {
             name,
             email,
-            phoneNumber
+            phoneNumber,
+            
         }
         let result = false;
-        result = await createContactItem(contact, getToken())
-        if(!result) {
-            alert("contact not added")
+        if(!isUpdate)
+        {
+
+            result = await createContactItem(contact, getToken())
+            if(!result) {
+                alert("contact not added")
+            }
         }
+        else{
+            const updateContactInfo: ContactModel = {
+                name : name,
+                email : email,
+                phoneNumber : phoneNumber,
+                id : updateContact!.id
+            }
+            result = await updateContactItem(updateContactInfo, getToken())
+            if(!result) {
+                alert("unable to update!")
+            }
+        }
+
 
     }
         
     return (
         <Card className='max-w-md dark:bg-neutral-primary-soft'>
 
-            <h1 className='font-bold text-xl'>Add New Contact</h1>
+            <h1 className='font-bold text-xl'>{isUpdate ? "Update Contact" : "Add New Contact"}</h1>
 
             <form className="flex max-w-sm flex-col gap-4">
                 <div>
@@ -52,7 +74,7 @@ const InputContact = () => {
                     <TextInput value={phoneNumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)} id="phone" type="tel" placeholder='Format: 123 473-2345' pattern='[0-9]{3} [0-9]{3}-[0-9]{4}' required />
                 </div>
                 
-                <Button onClick={handleCreateContact} type="submit">+   Add Contact</Button>
+                <Button onClick={handleSubmit} type="submit">{isUpdate ? "+ Update Contact" : "+   Add Contact"}</Button>
             </form>
         </Card>
     )

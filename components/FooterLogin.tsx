@@ -1,5 +1,4 @@
 import { Footer, FooterCopyright, FooterLink, FooterLinkGroup } from "flowbite-react";
-import React from 'react'
 
 const FooterLogin = () => {
   return (
