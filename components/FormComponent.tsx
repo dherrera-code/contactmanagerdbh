@@ -1,17 +1,18 @@
 'use client'
 import { Token } from '@/interfaces/interface';
 import { login } from '@/lib/user-services';
-import { Toast, ToastToggle, Card, Label, Checkbox, Button } from 'flowbite-react'
+import { Toast, ToastToggle, Card, Label, Checkbox, Button, ModalBody, Modal, ModalHeader, TextInput } from 'flowbite-react'
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
 import CreateUserModal from './CreateUserModal';
+
 
 const FormComponent = () => {
   const [loginParam, setLoginParams] = useState("");
   const [password, setPassword] = useState("");
   // add
   const [isRememberMe, setIsRememberMe] = useState<boolean | null>(null);
-  let isOpenModal = false;
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const { push } = useRouter();
 
@@ -20,8 +21,7 @@ const FormComponent = () => {
     console.log(isRememberMe);
   }
   const handleOpenModal = () => {
-    isOpenModal = true;
-
+    setIsOpenModal(true)
   }
   //handling login!!
   const handleSubmit = async () => {
@@ -54,9 +54,78 @@ const FormComponent = () => {
     }
   }, [])
 
+  const [newUsername, setNewUsername] = useState("")
+const [newEmail, setNewEmail] = useState("")
+const [newPassword, setNewPassword] = useState("")
+  function onCloseModal() {
+        setIsOpenModal(false);
+
+        setNewEmail("");
+    }
+
+    const handleCreateAccount = async () => {
+
+    }
+
   return (
     <div className='py-5 inter'>
-      {/* <CreateUserModal isModalOpen /> */}
+      
+
+
+    <div>
+      <Modal show={isOpenModal} size="md" onClose={onCloseModal} popup>
+                      <ModalHeader />
+                      <ModalBody>
+                          <div className="space-y-6">
+                              <h3 className="text-xl font-medium text-gray-900">Create an Account</h3>
+                              <div>
+                                  <div className="mb-2 block">
+                                      <Label htmlFor="text">Your Username</Label>
+                                  </div>
+                                  <TextInput
+                                      id="text"
+                                      placeholder="Enter username"
+                                      value={newUsername}
+                                      onChange={(event) => setNewUsername(event.target.value)}
+                                      required
+                                  />
+                              </div>
+                              <div>
+                                  <div className="mb-2 block">
+                                      <Label htmlFor="email">Your email</Label>
+                                  </div>
+                                  <TextInput
+                                      id="email"
+                                      placeholder="name@company.com"
+                                      value={newEmail}
+                                      onChange={(event) => setNewEmail(event.target.value)}
+                                      required
+                                  />
+                              </div>
+                              <div>
+                                  <div className="mb-2 block">
+                                      <Label htmlFor="password">Your password</Label>
+                                  </div>
+                                  <TextInput value={newPassword} onChange={(e) => setNewPassword(e.target.value)} id="password" type="password" required />
+                              </div>
+        
+                              <div className="flex justify-between">
+                                  <Button onClick={handleCreateAccount}>Create Account</Button>
+                                  <Button onClick={onCloseModal} className='bg-gray-400'>Close</Button>
+                              </div>
+                              {/* <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
+                                  Not registered?&nbsp;
+                                  <a onClick={handleOpenModal} className="text-primary-700 hover:underline dark:text-primary-500">
+                                      Create account
+                                  </a>
+                              </div> */}
+                          </div>
+                      </ModalBody>
+                  </Modal>
+    </div>
+
+
+
       <div className="flex flex-col gap-4 mb-5 shadow-2xs">
         <Toast className="min-w-md bg-purple-100">
           <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ">

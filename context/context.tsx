@@ -1,5 +1,5 @@
 "use client"
-import { ContactInfo, ContactInfoContextType, ContactModel, UpdateBooleanContextType, UpdateContactContextType } from "@/interfaces/interface";
+import { ContactInfoContextType, ContactModel, UpdateBooleanContextType, UpdateContactContextType } from "@/interfaces/interface";
 import { createContext, ReactNode, useContext, useState } from "react";
 
 const ContactContext = createContext<ContactInfoContextType | undefined>(undefined);

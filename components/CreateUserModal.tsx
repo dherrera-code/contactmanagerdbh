@@ -1,12 +1,16 @@
 'use client'
 import { Button, Checkbox, Label, Modal, ModalBody, ModalHeader, TextInput } from 'flowbite-react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-const CreateUserModal = (isOpen: boolean) => {
+interface IsOpenProp {
+    isOpen: boolean
+}
+
+const CreateUserModal = ({isOpen}: IsOpenProp) => {
     const [openModal, setOpenModal] = useState(true);
     const [email, setEmail] = useState("");
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(isOpen);
 
     const handleOpenModal = () => {
         setIsModalOpen(true)
@@ -16,9 +20,11 @@ const CreateUserModal = (isOpen: boolean) => {
         setOpenModal(false);
         setEmail("");
     }
+    const handleSubmit = () => {
+        setIsModalOpen(false)
+    }
     return (
         <>
-            <Button onClick={() => setOpenModal(true)}>Toggle modal</Button>
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <ModalHeader />
                 <ModalBody>
@@ -52,7 +58,7 @@ const CreateUserModal = (isOpen: boolean) => {
                             </a>
                         </div>
                         <div className="w-full">
-                            <Button>Log in to your account</Button>
+                            <Button onClick={handleSubmit}>Log in to your account</Button>
                         </div>
                         <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
                             Not registered?&nbsp;
