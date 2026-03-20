@@ -31,10 +31,9 @@ Add toast notification to tell user account was created!
 Add function for Keep me signed in button to keep user signed in! (Complete!)
 Add function to test if user is signed in!
 
-Look into ways to check if token is expired and renew token when token isn't expired!
 ## Peer Review (Isaias Gonzalez):
 - Account creation and login work correctly.
 - Contact creation, modification, and deletion work correctly.
 - Search functionality works, but requires an exact match (except for case-sensitivity).
-- Attempting to create contacts with invalid inputs initially appear to be rejected, but after refreshing the page it shows that the contacts were created.
-- It seems I have access to all users' contacts, unless there are default contacts after creating an account. Change this to only show a user's own contacts.
+- Attempting to create contacts with invalid inputs initially appear to be rejected, but after refreshing the page it shows that the contacts were created. (FIXED)
+- It seems I have access to all users' contacts, unless there are default contacts after creating an account. Change this to only show a user's own contacts. (INTENDED Feature)

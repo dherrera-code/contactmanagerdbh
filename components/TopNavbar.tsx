@@ -20,6 +20,8 @@ const TopNavbar = () => {
     }
 
     const handleSearch = async () => {
+
+        
         const contactFound: ContactModel = await getContactByName(name, getToken())
         // console.log(Object.keys(contactFound).length == 0)
         if(contactFound == null || Object.keys(contactFound).length === 0) {
