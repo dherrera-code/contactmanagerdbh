@@ -72,7 +72,7 @@ const FormComponent = () => {
             </div>
             <div className="relative">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <img src="/assets/lock-Icon.svg" className="w-4.5 h-4.5" alt="Lock Icon" />
+                <img src="/assets/Lock-Icon.svg" className="w-4.5 h-4.5" alt="Lock Icon" />
               </div>
               <input onChange={(e) => setPassword(e.target.value)} type="text" id="password" className="block w-100 h-10 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="alex.morgan@design.com" required />
             </div>
