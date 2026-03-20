@@ -38,8 +38,8 @@ const FormComponent = () => {
 
 
   return (
-    <div>
-      <div className="flex flex-col gap-4 mb-5">
+    <div className='py-5 inter'>
+      <div className="flex flex-col gap-4 mb-5 shadow-2xs">
         <Toast className="min-w-md bg-purple-100">
           <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ">
             <img src="/assets/i-icon.png" alt="" />
@@ -47,10 +47,20 @@ const FormComponent = () => {
           <div className="ml-3 text-sm font-normal">Welcome back! All systems are operational.</div>
           <ToastToggle />
         </Toast>
-
       </div>
-      <Card className="max-w-lg min-w-md">
-        <h1 className="text-center font-bold text-4xl pt-6">Sign In</h1>
+
+      <div className="flex flex-col gap-4 mb-5 shadow-2xs">
+        <Toast className="min-w-md bg-purple-100">
+          <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ">
+            <img src="/assets/i-icon.png" alt="" />
+          </div>
+          <div className="ml-3 text-sm font-normal">Account Created.</div>
+          <ToastToggle />
+        </Toast>
+      </div>
+
+      <Card className="max-w-md">
+        <h1 className="text-center font-bold text-3xl pt-6">Sign In</h1>
         <p>Enter your credentials to access your workspace.</p>
 
         <form className="flex max-w-md flex-col gap-4">
@@ -75,6 +85,9 @@ const FormComponent = () => {
                 <img src="/assets/Lock-Icon.svg" className="w-4.5 h-4.5" alt="Lock Icon" />
               </div>
               <input onChange={(e) => setPassword(e.target.value)} type="text" id="password" className="block w-100 h-10 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="alex.morgan@design.com" required />
+              <div className='absolute inset-y-0 start-92 flex items-center pe-3 pointer-events-auto'>
+                <img className='w-5 h-5' src="/assets/Eye.svg" alt="" />
+              </div>
             </div>
           </div>
 
@@ -102,6 +115,11 @@ const FormComponent = () => {
           </div>
         </div>
       </Card>
+
+      <div className='shadow-2xs mt-3 text-center flex justify-center mt-10'>
+        <div className='green-dot me-2 '></div>
+        <p className='text-[12px]'>Secure AES-256 ENCRYPTION ACTIVE</p>
+      </div>
     </div>
   )
 }

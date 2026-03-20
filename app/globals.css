@@ -21,10 +21,17 @@
   }
 }
 
+.inter {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: Inter;
 }
 
 .edit-icon:hover {
@@ -39,5 +46,10 @@ body {
   text-decoration: underline;
   cursor: pointer;
 }
-
-
+.green-dot{
+  height: 15px;
+  width: 15px;
+  background-color: lime;
+  border-radius: 50%;
+  display: inline-block;
+}
