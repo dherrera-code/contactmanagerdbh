@@ -12,7 +12,7 @@ const InputContact = () => {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const {isUpdate} = useIsUpdateBool();
-    const {updateContact, setUpdateContact} = useUpdateContact();
+    const {updateContact} = useUpdateContact();
 
 
     const handleSubmit = async (event:React.SubmitEvent<HTMLFormElement>) => {
@@ -50,7 +50,6 @@ const InputContact = () => {
             setEmail(updateContact!.email)
             setPhoneNumber(updateContact!.phoneNumber)
         }
-        console.log("This component rendering")
     }, [isUpdate])
         
     return (

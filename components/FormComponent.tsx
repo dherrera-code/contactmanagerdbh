@@ -18,7 +18,6 @@ const FormComponent = () => {
 
   const handleBool = () => {
     setIsRememberMe(!isRememberMe);
-    console.log(isRememberMe);
   }
   const handleOpenModal = () => {
     setIsOpenModal(true)
@@ -29,16 +28,11 @@ const FormComponent = () => {
       loginParam,
       password
     }
-    console.log(isRememberMe);
-    console.log(user)
 
     const token: Token | null = await login(user);
-    console.log(token?.token);
-    console.log(token);
     if (token != null) {
       if (typeof window != null) {
         if (isRememberMe) {
-          console.log(isRememberMe);
           localStorage.setItem("token", token.token);
         }
         else{
@@ -76,13 +70,9 @@ const FormComponent = () => {
 
     }
     const success = await createAccount(newUser);
-
-    console.log(success) //returns a bool (true or false)
     onCloseModal()
     // call toast notification with success message about account!
-    if(success) {
-      setIsSuccess(true)
-    }
+    if(success) setIsSuccess(true)
       else setIsSuccess(false)
 
     setShowToast(true);
@@ -96,7 +86,6 @@ const FormComponent = () => {
 
   return (
     <div className='py-5 inter'>
-
       <div>
         <Modal show={isOpenModal} size="md" onClose={onCloseModal} popup>
           <ModalHeader />
@@ -170,7 +159,6 @@ const FormComponent = () => {
 
         <form className="flex max-w-md flex-col gap-4">
           <div className="flex flex-col">
-
             <div className="mb-2 block">
               <Label htmlFor="text">Email or Username</Label>
             </div>
@@ -208,9 +196,9 @@ const FormComponent = () => {
           <Button onClick={handleSubmit} className="cursor-pointer">Sign In to Dashboard </Button>
         </form>
       </Card>
+      
       <Card className="rounded-t-none">
         <div className="grid grid-cols-2 place-items-center">
-
           <div>
             <p>New to the platform?</p>
           </div>

@@ -33,13 +33,10 @@ const TableContacts = () => {
 
     const getAllContacts = async () => {
         const data: ContactModel[] = await getContacts(getToken());
-        console.log(data);
-
         setContactItems(data);
     }
     useEffect(() => {
         getAllContacts();
-
     }, [])
 
 
@@ -50,7 +47,6 @@ const TableContacts = () => {
             </Card>
 
             <Card className='rounded-none'>
-                {/* <img src={"/assets/Icon.svg"} className='h-4 w-4'></img> */}
                 <div className="overflow-x-auto">
                     <Table hoverable>
                         <TableHead>
