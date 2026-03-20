@@ -15,8 +15,7 @@ const InputContact = () => {
     const {updateContact} = useUpdateContact();
 
 
-    const handleSubmit = async (event:React.SubmitEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
         const contact: ContactInfo = {
             name,
             email,
@@ -57,7 +56,7 @@ const InputContact = () => {
 
             <h1 className='font-bold text-xl'>{isUpdate ? "Update Contact" : "Add New Contact"}</h1>
 
-            <form onSubmit={(event: React.SubmitEvent<HTMLFormElement>) => handleSubmit(event)} className="flex max-w-sm flex-col gap-4">
+            <form onSubmit={(handleSubmit)} className="flex max-w-sm flex-col gap-4">
                 <div>
                     <div className="mb-2 block">
                         <Label htmlFor='name'>Name</Label>
