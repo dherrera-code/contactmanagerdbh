@@ -2,24 +2,34 @@
 import { Token } from '@/interfaces/interface';
 import { login } from '@/lib/user-services';
 import { Toast, ToastToggle, Card, Label, Checkbox, Button } from 'flowbite-react'
-import { useRouter } from 'next/navigation';
-import { useState } from 'react'
+import { redirect, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react'
+import CreateUserModal from './CreateUserModal';
 
 const FormComponent = () => {
   const [loginParam, setLoginParams] = useState("");
   const [password, setPassword] = useState("");
-
-  const [isRememberMe, setIsRememberMe] = useState<boolean>(true);
+  // add
+  const [isRememberMe, setIsRememberMe] = useState<boolean | null>(null);
+  let isOpenModal = false;
 
   const { push } = useRouter();
 
-  const handleBool = () => setIsRememberMe(!isRememberMe);
+  const handleBool = () => {
+    setIsRememberMe(!isRememberMe);
+    console.log(isRememberMe);
+  }
+  const handleOpenModal = () => {
+    isOpenModal = true;
+
+  }
   //handling login!!
   const handleSubmit = async () => {
     const user = {
       loginParam,
       password
     }
+    console.log(isRememberMe);
     console.log(user)
 
     const token: Token | null = await login(user);
@@ -27,7 +37,10 @@ const FormComponent = () => {
     console.log(token);
     if (token != null) {
       if (typeof window != null) {
-        localStorage.setItem("token", token.token);
+        if (isRememberMe) {
+          console.log(isRememberMe);
+          localStorage.setItem("token", token.token);
+        }
         push("/Dashboard");
       } else {
         alert("Login error! Password no good")
@@ -35,10 +48,15 @@ const FormComponent = () => {
     }
 
   }
-
+  useEffect(() => {
+    if(localStorage.getItem("token") != null){
+      redirect("/Dashboard")
+    }
+  }, [])
 
   return (
     <div className='py-5 inter'>
+      {/* <CreateUserModal isModalOpen /> */}
       <div className="flex flex-col gap-4 mb-5 shadow-2xs">
         <Toast className="min-w-md bg-purple-100">
           <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ">
@@ -93,7 +111,7 @@ const FormComponent = () => {
 
           <div className="grid grid-cols-2">
             <div className="flex items-center gap-2">
-              <Checkbox className="cursor-pointer" id="remember" />
+              <Checkbox onClick={handleBool} className="cursor-pointer" id="remember" />
               <Label htmlFor="remember">Keep me signed in</Label>
             </div>
             <div className="place-items-end">
@@ -110,7 +128,7 @@ const FormComponent = () => {
             <p>New to the platform?</p>
           </div>
           <div>
-            <button className="a-tag ">Create an account</button>
+            <button onClick={handleOpenModal} className="a-tag">Create an account</button>
 
           </div>
         </div>

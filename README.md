@@ -30,3 +30,5 @@ Login Function:
 Add input validation to login page!
 Add css class function to add border red color to password!
 Add toast notification to tell user account was created!
+Add function for Keep me signed in button to keep user signed in! (Complete!)
+Add function to test if user is signed in!
