@@ -10,7 +10,7 @@ const TopNavbar = () => {
             <NavbarToggle />
             <NavbarCollapse>
                 <img src="/assets/question.png" className='h-4.5 w-4.5 me-4' alt="question mark icon" />
-                <p className='pe-30'>Support</p>
+                <p className='pe-30 text-gray-500'>Support</p>
             </NavbarCollapse>
         </Navbar>
     )
