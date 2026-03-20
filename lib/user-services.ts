@@ -50,7 +50,7 @@ export const checkToken = () => {
 export const getToken = () => {
     //localStorage.getItem('token') ?? ""; //* if token is null, it will return an empty string!
     let token = localStorage.getItem("token")
-    if(token === "")
+    if(token === null)
     {
         token = sessionStorage.getItem("token")
     }
