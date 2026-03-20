@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
       <div
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-zinc-50`}
       >
         <ContactProvider>
         <TopNavbar />

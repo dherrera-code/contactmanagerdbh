@@ -9,23 +9,26 @@ import { useEffect, useState } from 'react'
 const TableContacts = () => {
 
     const [contactItems, setContactItems] = useState<ContactModel[]>([]);
-    const {contact} = useContacts();
+    const {contact , setContact} = useContacts();
     const {setIsUpdate} = useIsUpdateBool();
-    const {updateContact, setUpdateContact} = useUpdateContact();
+    const {setUpdateContact} = useUpdateContact();
 
     const handleUpdate = (contactToUpdate: ContactModel) => {
         setIsUpdate(true);
         setUpdateContact(contactToUpdate);
-
     }
 
     const handleDelete = async (contactToDelete : ContactInfo) => {
+        if(contactToDelete.name == contact?.name){
+            setContact(null);
+        }
         const isDelete = await removeContactItem(contactToDelete, getToken());
         if(!isDelete) 
             console.log("Contact unable to be deleted!")
         else console.log("Contact was removed!")
 
         getAllContacts();
+
     }
 
     const getAllContacts = async () => {
@@ -63,7 +66,7 @@ const TableContacts = () => {
                                 {
                                     contactItems.map((item) => (
                                             <TableRow key={item.id} className='bg-white'>
-                                                <TableCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                                                <TableCell className='whitespace-nowrap font-medium text-gray-900'>
                                                     {item.name}
                                                 </TableCell>
                                                 <TableCell>{item.email}</TableCell>
@@ -90,11 +93,10 @@ const TableContacts = () => {
                     <Table>
                         {/* Map out search result here */}
                         <TableBody className='divide-y'>
-                            {/*  */}
                             {
                                 (contact != null ) ? (
                                     <TableRow className='bg-white'>
-                                                <TableCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                                                <TableCell className='whitespace-nowrap font-medium text-gray-900'>
                                                     {contact.name}
                                                 </TableCell>
                                                 <TableCell>{contact.email}</TableCell>

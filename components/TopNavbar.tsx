@@ -21,14 +21,17 @@ const TopNavbar = () => {
 
     const handleSearch = async () => {
         const contactFound: ContactModel = await getContactByName(name, getToken())
-        
-        console.log(name + " : " + contactFound);
-        if(contactFound != null) setContact(contactFound);
-        else {
+        // console.log(Object.keys(contactFound).length == 0)
+        if(contactFound == null || Object.keys(contactFound).length === 0) {
             setContact(null);
-
+            console.log("Contact is set null here!")
+            // Create function to Handle input error!
+        }
+        else {
+            setContact(contactFound);
         }
         console.log(contactFound)
+        console.log(contact)
         console.log(contactFound.name)
 
     }

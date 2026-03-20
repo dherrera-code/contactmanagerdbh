@@ -4,15 +4,13 @@ import { ContactInfo, ContactModel } from '@/interfaces/interface'
 import { createContactItem, updateContactItem } from '@/lib/contacts-services'
 import { getToken } from '@/lib/user-services'
 import { Button, Card, Label, TextInput } from 'flowbite-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const InputContact = () => {
-    // console.log("Input component rendering!")
     
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    
     const {isUpdate} = useIsUpdateBool();
     const {updateContact, setUpdateContact} = useUpdateContact();
 
@@ -22,7 +20,6 @@ const InputContact = () => {
             name,
             email,
             phoneNumber,
-            
         }
         let result = false;
         if(!isUpdate)
@@ -44,10 +41,16 @@ const InputContact = () => {
             if(!result) {
                 alert("unable to update!")
             }
-        }
-
-
+        }      
     }
+    useEffect(() => {
+        if(isUpdate){
+            setName(updateContact!.name)
+            setEmail(updateContact!.email)
+            setPhoneNumber(updateContact!.phoneNumber)
+        }
+        console.log("This component rendering")
+    }, [isUpdate])
         
     return (
         <Card className='max-w-md dark:bg-neutral-primary-soft'>
