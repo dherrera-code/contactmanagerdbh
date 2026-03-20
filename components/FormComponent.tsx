@@ -41,6 +41,9 @@ const FormComponent = () => {
           console.log(isRememberMe);
           localStorage.setItem("token", token.token);
         }
+        else{
+          sessionStorage.setItem("token", token.token);
+        }
         push("/Dashboard");
       } else {
         alert("Login error! Password no good")

@@ -47,6 +47,13 @@ export const checkToken = () => {
     const token = localStorage.getItem("token");
     return !!token;
 }
-export const getToken = () => localStorage.getItem('token') ?? "";//* if token is null, it will return an empty string!
-
+export const getToken = () => {
+    //localStorage.getItem('token') ?? ""; //* if token is null, it will return an empty string!
+    let token = localStorage.getItem("token")
+    if(token === "")
+    {
+        token = sessionStorage.getItem("token")
+    }
+    return token ?? "";
+}
 export const loggedInData = () => JSON.parse(localStorage.getItem('user')!);

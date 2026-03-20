@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${interFont.className} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${interFont.className} min-h-screen antialiased`}
       >
         <ThemeInit />
           {children}     
