@@ -2,12 +2,11 @@
 
 ## Contact Manager!!
 
-## This nextjs application will allow me; the user; to input, view, update and remove contacts within this contacts page!
+## The application allows user to create account and login to view a contact dashboard page!
 
 ## Link to my Hosted Build!!
 
 https://contactmanagerdbh.vercel.app
-
 
 ## Notes
 
@@ -19,7 +18,6 @@ Components needed:
 
 Next Steps to complete project:
 When website boots up, Display all already created contacts!
-
 
 Contact Manager
 Login function created, getAllContacts, createNewContacts implemented! 
@@ -34,3 +32,4 @@ Add function for Keep me signed in button to keep user signed in! (Complete!)
 Add function to test if user is signed in!
 
 Look into ways to check if token is expired and renew token when token isn't expired!
+## Peer Review (): 
