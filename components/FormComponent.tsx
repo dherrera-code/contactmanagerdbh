@@ -4,7 +4,6 @@ import { createAccount, login } from '@/lib/user-services';
 import { Toast, ToastToggle, Card, Label, Checkbox, Button, ModalBody, Modal, ModalHeader, TextInput } from 'flowbite-react'
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
-import CreateUserModal from './CreateUserModal';
 
 
 const FormComponent = () => {
