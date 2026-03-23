@@ -43,10 +43,10 @@ Add function to test if user is signed in!
     created an error modal to pass in an error message and useState to toggle off modal!
     refactored create account modal to another component to be evoked! 
 
-
     Add message to tell user account was created or not! (DONE)
-    Rework error message login to show red text under password with password border red!
 
-    Add function to test if stored token is expired when loading to dashboard!
+    Add function to test if stored token is expired when loading to dashboard to return to the login page! (DONE)
+
+    Rework error message login to show red text under password with password border red!
 
     Add a function to hide password and show password when entering!

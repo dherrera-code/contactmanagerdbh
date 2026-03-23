@@ -5,10 +5,12 @@ import { getContactByName } from '@/lib/contacts-services'
 import { getToken } from '@/lib/user-services'
 import { Navbar, NavbarBrand, NavbarToggle, NavbarCollapse, } from 'flowbite-react'
 import { KeyboardEvent, useState } from 'react'
+import ErrorMessageModal from './ErrorMessageModal'
 
 const TopNavbar = () => {
 
     const [name, setName] = useState("")
+    const [isOpenModal, setIsOpenModal] = useState(false)
     const { contact, setContact } = useContacts()
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -26,18 +28,18 @@ const TopNavbar = () => {
         // console.log(Object.keys(contactFound).length == 0)
         if(contactFound == null || Object.keys(contactFound).length === 0) {
             setContact(null);
-            // console.log("Contact is set null here!")
+            setIsOpenModal(true);
             // Create function to Handle input error!
         }
         else {
             setContact(contactFound);
         }
-        // console.log(contactFound)
-        // console.log(contact)
-        // console.log(contactFound.name)
+
 
     }
     return (
+        <div>
+            <ErrorMessageModal message="Error: Name entered doesn't exist within our contact database!" isOpen={isOpenModal} setIsOpen={setIsOpenModal} ></ErrorMessageModal>
         <Navbar fluid className='dark:bg-white bg-white border-b-mist-200 border-b-2'>
             <NavbarBrand className='ps-2' >
                 <img src="/assets/ContactFlow-logo.png" className="mr-3 h-9 sm:h-11" alt="Flowbite React Logo" />
@@ -58,6 +60,7 @@ const TopNavbar = () => {
             </NavbarCollapse>
 
         </Navbar>
+        </div>
     )
 }
 

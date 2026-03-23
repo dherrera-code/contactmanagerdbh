@@ -1,4 +1,5 @@
 import { ContactInfo, ContactModel } from "@/interfaces/interface";
+import { redirect } from "next/navigation";
 
 
 const url = "https://contactmanagerdbhapi-cnfhhvf7e7fse7gt.westus3-01.azurewebsites.net/Contact/";
@@ -12,11 +13,10 @@ export const getContacts = async (token: string) => {
         }
     });
 
-    if (!response.ok) {
-        const data = await response.json();
-        const message = data.message;
-        console.log(message);
-        return [];
+    if (!response.ok) { // if user is unauthorized, remove token value from local storage and redirect to login
+        //these statements will only run if user is unauthorized!
+        localStorage.removeItem("token");
+        redirect("/");
     }
     const data: ContactModel[] = await response.json();
     return data;
@@ -32,9 +32,9 @@ export const getContactByName = async (name: string, token: string) => {
     });
 
     if (!response.ok) {
-        const data = await response.json()
-        const message = data.message;
-        console.log(message);
+        // const data = await response.json()
+        // const message = data.message;
+        // console.log(message);
         return [];
     }
 
