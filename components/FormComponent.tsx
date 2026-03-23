@@ -5,23 +5,21 @@ import { Toast, ToastToggle, Card, Label, Checkbox, Button, ModalBody, Modal, Mo
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
 import ErrorMessageModal from './ErrorMessageModal';
+import CreateAccountModal from './CreateAccountModal';
 
 
 const FormComponent = () => {
   const [loginParam, setLoginParams] = useState("");
   const [password, setPassword] = useState("");
-  // add
+
   const [isRememberMe, setIsRememberMe] = useState<boolean | null>(null);
-  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const { push } = useRouter();
 
   const handleBool = () => {
     setIsRememberMe(!isRememberMe);
   }
-  const handleOpenModal = () => {
-    setIsOpenModal(true)
-  }
+
   //handling login!!
   const handleSubmit = async () => {
     const user = {
@@ -36,56 +34,37 @@ const FormComponent = () => {
         if (isRememberMe) {
           localStorage.setItem("token", token.token);
         }
-        else{
+        else {
           sessionStorage.setItem("token", token.token);
         }
         push("/Dashboard");
       }
     }
-    else{ // if token is null!!!
+    else { // if token is null!!!
       // add logic to tell user unable to login 
-        // alert("insert error modal here")
-        setMessage("Unable to Login, Username/Email or Password may be incorrect!")
-        setIsError(true)
+      // alert("insert error modal here")
+      setMessage("Unable to Login, Username/Email or Password may be incorrect!")
+      setIsError(true)
     }
 
   }
   const [isError, setIsError] = useState(false)
   const [message, setMessage] = useState("")
+
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
       redirect("/Dashboard")
     }
   }, [])
-  // Modal elements and function!
-  const [newUsername, setNewUsername] = useState("")
-  const [newEmail, setNewEmail] = useState("")
-  const [newPassword, setNewPassword] = useState("")
 
-  function onCloseModal() {
-    setIsOpenModal(false);
-    setNewUsername("");
-    setNewEmail("");
-    setNewPassword("")
+const [isCreateOpen, setIsCreateOpen] = useState(false)
+  const handleToggleModal = () => {
+    setIsCreateOpen(true);
   }
 
-  const handleCreateAccount = async () => {
-    const newUser : CreateUser = {
-      username : newUsername,
-      email : newEmail,
-      password : newPassword
 
-    }
-    const success = await createAccount(newUser);
-    onCloseModal()
-    // call toast notification with success message about account!
-    if(success) setIsSuccess(true)
-      else setIsSuccess(false)
-
-    setShowToast(true);
-  }
   const [showToast, setShowToast] = useState(false)
-  const [isSuccess, setIsSuccess] = useState<boolean>(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const toastMessage = (isSuccess: boolean) => {
     return (isSuccess) ? "Account Created" : "Account Not Created. Username or Email is already in use!";
@@ -94,52 +73,7 @@ const FormComponent = () => {
   return (
     <div className='py-5 inter'>
       <ErrorMessageModal message={message} isOpen={isError} setIsOpen={setIsError} ></ErrorMessageModal>
-      <div>
-        <Modal show={isOpenModal} size="md" onClose={onCloseModal} popup>
-          <ModalHeader />
-          <ModalBody>
-            <div className="space-y-6">
-              <h3 className="text-xl font-medium text-gray-900">Create an Account</h3>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="text">Your Username</Label>
-                </div>
-                <TextInput
-                  id="text"
-                  placeholder="Enter username"
-                  value={newUsername}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewUsername(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="email">Your email</Label>
-                </div>
-                <TextInput
-                  id="email"
-                  type='email'
-                  placeholder="name@company.com"
-                  value={newEmail}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="password">Your password</Label>
-                </div>
-                <TextInput value={newPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewPassword(e.target.value)} id="password" type="password" required />
-              </div>
-
-              <div className="flex justify-between">
-                <Button onClick={handleCreateAccount}>Create Account</Button>
-                <Button onClick={onCloseModal} className='bg-gray-400'>Close</Button>
-              </div>
-            </div>
-          </ModalBody>
-        </Modal>
-      </div>
+      <CreateAccountModal isOpen={isCreateOpen} setIsOpen={setIsCreateOpen}></CreateAccountModal>
 
       <div className="flex flex-col gap-4 mb-5 shadow-2xs">
         <Toast className="min-w-md bg-purple-100">
@@ -150,13 +84,13 @@ const FormComponent = () => {
           <ToastToggle />
         </Toast>
       </div>
-{/* Pop up toast notification when user is created or not! */}
-      { showToast && (<div className="flex flex-col gap-4 mb-5 shadow-2xs">
+      {/* Pop up toast notification when user is created or not! */}
+      {showToast && (<div className="flex flex-col gap-4 mb-5 shadow-2xs">
         <Toast className="min-w-md bg-purple-100">
           <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ">
             <img src="/assets/i-icon.png" alt="" />
           </div>
-          <div className="ml-3 text-sm font-normal">{toastMessage(isSuccess!)}</div>
+          <div className="ml-3 text-sm font-normal">{toastMessage(isSuccess)}</div>
           <ToastToggle />
         </Toast>
       </div>)}
@@ -204,14 +138,14 @@ const FormComponent = () => {
           <Button onClick={handleSubmit} className="cursor-pointer">Sign In to Dashboard </Button>
         </form>
       </Card>
-      
+
       <Card className="rounded-t-none">
         <div className="grid grid-cols-2 place-items-center">
           <div>
             <p>New to the platform?</p>
           </div>
           <div>
-            <button onClick={handleOpenModal} className="a-tag">Create an account</button>
+            <button onClick={handleToggleModal} className="a-tag">Create an account</button>
 
           </div>
         </div>
