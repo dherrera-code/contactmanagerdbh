@@ -6,9 +6,11 @@ import React, { Dispatch, SetStateAction, useState } from 'react'
 interface CreateAccountProps {
     isOpen: boolean
     setIsOpen: Dispatch<SetStateAction<boolean>>;
+    isSuccess: boolean | null
+    setIsSuccess: Dispatch<SetStateAction<boolean | null>>;
 }
 
-const CreateAccountModal = ({isOpen, setIsOpen} : CreateAccountProps) => {
+const CreateAccountModal = ({isOpen, setIsOpen, isSuccess, setIsSuccess} : CreateAccountProps) => {
     // const [isOpenModal, setIsOpenModal] = useState(false)
     // Modal elements and function!
     const [newUsername, setNewUsername] = useState("")
@@ -19,10 +21,8 @@ const CreateAccountModal = ({isOpen, setIsOpen} : CreateAccountProps) => {
 
     // const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-    // const handleOpenModal = () => {
-    //     setIsOpenModal(true)
-    // }
-    function onCloseModal() {
+
+    const onCloseModal = () => {
         setIsOpen(false);
         setNewUsername("");
         setNewEmail("");
@@ -39,9 +39,8 @@ const CreateAccountModal = ({isOpen, setIsOpen} : CreateAccountProps) => {
         const success = await createAccount(newUser);
         onCloseModal()
         // call toast notification with success message about account!
-        // if (success) setIsSuccess(true)
-        // else setIsSuccess(false)
-
+        if (success) setIsSuccess(true)
+        else setIsSuccess(false)
         // setShowToast(true);
     }
 

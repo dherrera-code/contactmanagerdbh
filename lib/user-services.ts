@@ -14,7 +14,6 @@ export const createAccount = async (user: CreateUser) => {
     if(!response.ok){
         const data = await response.json();
         const message = data.message;
-        console.log(message)
         return data.success;
     }
 
@@ -32,9 +31,6 @@ export const login = async (user: Login) => {
     });
     console.log(response);
     if(!response.ok){
-        // const data = await response.json();
-        // console.log(await data)
-        // const message = data.message;
         return null;
     }
 

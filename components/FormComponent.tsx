@@ -48,32 +48,44 @@ const FormComponent = () => {
     }
 
   }
+
   const [isError, setIsError] = useState(false)
   const [message, setMessage] = useState("")
 
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
+  const handleToggleModal = () => {
+    setIsCreateOpen(true);
+  }
+  
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
+  
+  const toastMessage = (isSuccess: boolean) => {
+    return (isSuccess) ? "Account Created" : "Account Not Created. Username or Email is already in use!";
+  }
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
       redirect("/Dashboard")
     }
-  }, [])
+    console.log("use effect is rendering");
+    if(isSuccess){
+    console.log(isSuccess)
 
-const [isCreateOpen, setIsCreateOpen] = useState(false)
-  const handleToggleModal = () => {
-    setIsCreateOpen(true);
-  }
-
-
-  const [showToast, setShowToast] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-
-  const toastMessage = (isSuccess: boolean) => {
-    return (isSuccess) ? "Account Created" : "Account Not Created. Username or Email is already in use!";
-  }
+      setMessage("Account creation Successful!")
+      setIsError(true)
+    }
+    else if(isSuccess != null){
+      setMessage("User creation failed! Email is already in use Or Username is already taken!")
+      setIsError(true)
+    }
+    console.log(isSuccess)
+    setIsSuccess(null)
+  }, [isSuccess])
 
   return (
     <div className='py-5 inter'>
       <ErrorMessageModal message={message} isOpen={isError} setIsOpen={setIsError} ></ErrorMessageModal>
-      <CreateAccountModal isOpen={isCreateOpen} setIsOpen={setIsCreateOpen}></CreateAccountModal>
+      <CreateAccountModal isOpen={isCreateOpen} setIsOpen={setIsCreateOpen} isSuccess={isSuccess} setIsSuccess={setIsSuccess}></CreateAccountModal>
+
 
       <div className="flex flex-col gap-4 mb-5 shadow-2xs">
         <Toast className="min-w-md bg-purple-100">
@@ -84,16 +96,7 @@ const [isCreateOpen, setIsCreateOpen] = useState(false)
           <ToastToggle />
         </Toast>
       </div>
-      {/* Pop up toast notification when user is created or not! */}
-      {showToast && (<div className="flex flex-col gap-4 mb-5 shadow-2xs">
-        <Toast className="min-w-md bg-purple-100">
-          <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ">
-            <img src="/assets/i-icon.png" alt="" />
-          </div>
-          <div className="ml-3 text-sm font-normal">{toastMessage(isSuccess)}</div>
-          <ToastToggle />
-        </Toast>
-      </div>)}
+      
 
       <Card className="max-w-md">
         <h1 className="text-center font-bold text-3xl pt-6">Sign In</h1>

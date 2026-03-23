@@ -37,3 +37,16 @@ Add function to test if user is signed in!
 - Search functionality works, but requires an exact match (except for case-sensitivity).
 - Attempting to create contacts with invalid inputs initially appear to be rejected, but after refreshing the page it shows that the contacts were created. (FIXED)
 - It seems I have access to all users' contacts, unless there are default contacts after creating an account. Change this to only show a user's own contacts. (INTENDED Feature)
+
+# Notes for Monday!
+    Fixed exploit to go to dashboard page when appending URL,
+    created an error modal to pass in an error message and useState to toggle off modal!
+    refactored create account modal to another component to be evoked! 
+
+
+    Add message to tell user account was created or not! (DONE)
+    Rework error message login to show red text under password with password border red!
+
+    Add function to test if stored token is expired when loading to dashboard!
+
+    Add a function to hide password and show password when entering!
