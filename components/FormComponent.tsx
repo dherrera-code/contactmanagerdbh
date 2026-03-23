@@ -1,12 +1,12 @@
 'use client'
-import { CreateUser, Token } from '@/interfaces/interface';
-import { createAccount, login } from '@/lib/user-services';
+import { Token } from '@/interfaces/interface';
+import { login } from '@/lib/user-services';
 import { Toast, ToastToggle, Card, Label, Checkbox, Button, ModalBody, Modal, ModalHeader, TextInput } from 'flowbite-react'
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
 import ErrorMessageModal from './ErrorMessageModal';
 import CreateAccountModal from './CreateAccountModal';
-import { HiExclamation, HiExclamationCircle } from 'react-icons/hi';
+import { HiExclamationCircle } from 'react-icons/hi';
 
 
 const FormComponent = () => {

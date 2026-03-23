@@ -1,6 +1,5 @@
 import { Modal, ModalHeader, ModalBody, Button } from 'flowbite-react'
-import React, { Dispatch, SetStateAction } from 'react'
-import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { Dispatch, SetStateAction } from 'react'
 
 interface ErrorModalProps {
     message : string

@@ -32,22 +32,20 @@ const TableContacts = () => {
             setContact(null);
         }
         const isDelete = await removeContactItem(contactToDelete, getToken());
-        if(!isDelete) 
-            console.log("Contact unable to be deleted!")
+        if(!isDelete) console.log("Contact unable to be deleted!")
         else console.log("Contact was removed!")
 
-        getAllContacts();
-
+        getAllContacts(); // reloads getAllcontacts when one is deleted!
     }
 
     const getAllContacts = async () => {
         const data: ContactModel[] = await getContacts(getToken());
         setContactItems(data);
     }
-    useEffect(() => {
-        getAllContacts();
-    }, [])
 
+    useEffect(() => {
+        getAllContacts(); // gets all contacts when user loads to dashboard page!
+    }, [])
 
     return (
         <div>

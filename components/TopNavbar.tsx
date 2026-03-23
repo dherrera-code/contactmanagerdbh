@@ -22,10 +22,8 @@ const TopNavbar = () => {
     }
 
     const handleSearch = async () => {
-
-        
         const contactFound: ContactModel = await getContactByName(name, getToken())
-        // console.log(Object.keys(contactFound).length == 0)
+        // if contactFound is null Or empty
         if(contactFound == null || Object.keys(contactFound).length === 0) {
             setContact(null);
             setIsOpenModal(true);
@@ -34,7 +32,6 @@ const TopNavbar = () => {
         else {
             setContact(contactFound);
         }
-
 
     }
     return (

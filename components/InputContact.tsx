@@ -26,7 +26,7 @@ const InputContact = () => {
 
             result = await createContactItem(contact, getToken())
             if (!result) {
-                alert("contact not added")
+                // alert("contact not added")
             }
         }
         else {
@@ -38,7 +38,7 @@ const InputContact = () => {
             }
             result = await updateContactItem(updateContactInfo, getToken())
             if (!result) {
-                alert("unable to update!")
+                // alert("unable to update!")
             }
         }
     }
@@ -71,7 +71,6 @@ const InputContact = () => {
                     <div className="mb-2 block">
                         <Label htmlFor='email1'>Email</Label>
                     </div>
-                    {/* <TextInput value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} id="email1" type="email" placeholder="john.doe@example.com" required /> */}
                     <div className='relative'>
                         <div className='absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none'>
                             <img className='w-4 h-4' src="/assets/mail-icon.svg" alt="Person Icon" />
@@ -89,8 +88,6 @@ const InputContact = () => {
                             <input className='block w-96 h-10 p-4 ps-9 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500' value={phoneNumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)} id="phone" type="tel" placeholder='Format: 123 473-2345' pattern='[0-9]{3} [0-9]{3}-[0-9]{4}' required />
                         </div>
                     </div>
-                    {/* <TextInput value={phoneNumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)} id="phone" type="tel" placeholder='Format: 123 473-2345' pattern='[0-9]{3} [0-9]{3}-[0-9]{4}' required /> */}
-
                 </div>
 
                 <Button type="submit">{isUpdate ? "+ Update Contact" : "+   Add Contact"}</Button>
