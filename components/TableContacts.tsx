@@ -4,9 +4,18 @@ import { ContactInfo, ContactModel } from '@/interfaces/interface'
 import { getContacts, removeContactItem } from '@/lib/contacts-services'
 import { getToken } from '@/lib/user-services'
 import { Card, Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react'
+import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const TableContacts = () => {
+
+    useEffect(() => {
+        if(localStorage.getItem("token") == null){
+        if(sessionStorage.getItem("token") == null){
+            redirect("/")
+        }
+    }
+    } , [])
 
     const [contactItems, setContactItems] = useState<ContactModel[]>([]);
     const {contact , setContact} = useContacts();
