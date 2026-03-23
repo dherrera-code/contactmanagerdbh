@@ -19,6 +19,8 @@ const FormComponent = () => {
   const [message, setMessage] = useState("")
   // use state to allow user to create an account!
   const [isCreateOpen, setIsCreateOpen] = useState(false)
+  // create another useState boolean to allow user to see their password inputs
+  const [viewPassword, setViewPassword] = useState(false)
 
   const { push } = useRouter();
 
@@ -26,6 +28,9 @@ const FormComponent = () => {
     setIsRememberMe(!isRememberMe);
   }
 
+  const toggleViewPassword = () => {
+    setViewPassword(!viewPassword)
+  }
   //handling login!!
   const handleSubmit = async () => {
     const user = {
@@ -48,37 +53,30 @@ const FormComponent = () => {
     }
     else { // if token is null!!!
       // add logic to tell user unable to login 
-      // alert("insert error modal here")
-      // setMessage("Unable to Login, Username/Email or Password may be incorrect!")
-      // setIsError(true)
       setFailLogin(true);
     }
-
   }
-
 
   const handleToggleModal = () => {
     setIsCreateOpen(true);
   }
-
+// this useState bool is used to test if account creation was successful!
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
 
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
       redirect("/Dashboard")
     }
-    console.log("use effect is rendering");
-    if (isSuccess) {
-      console.log(isSuccess)
 
+    if (isSuccess) {
       setMessage("Account creation Successful!")
-      setIsError(true)
+      setIsError(true) // used to open modal
     }
     else if (isSuccess != null) {
       setMessage("Account creation failed! Email is already in use Or Username is already taken!")
-      setIsError(true)
+      setIsError(true) // used to open modal again
     }
-    console.log(isSuccess)
+  
     setIsSuccess(null)
   }, [isSuccess])
 
@@ -86,7 +84,6 @@ const FormComponent = () => {
     <div className='py-5 inter'>
       <ErrorMessageModal message={message} isOpen={isError} setIsOpen={setIsError} ></ErrorMessageModal>
       <CreateAccountModal isOpen={isCreateOpen} setIsOpen={setIsCreateOpen} isSuccess={isSuccess} setIsSuccess={setIsSuccess}></CreateAccountModal>
-
 
       <div className="flex flex-col gap-4 mb-5 shadow-2xs">
         <Toast className="min-w-md bg-purple-100">
@@ -115,6 +112,7 @@ const FormComponent = () => {
               <input onChange={(e) => setLoginParams(e.target.value)} type="text" id="text" className="block w-100 h-10 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="alex.morgan@design.com" required />
             </div>
           </div>
+
           <div>
             <div className="mb-2 block">
               <Label htmlFor="password">Password</Label>
@@ -124,10 +122,10 @@ const FormComponent = () => {
                 <img src="/assets/lock-icon.svg" className="w-4.5 h-4.5" alt="Lock Icon" />
               </div>
 
-              <input onChange={(e) => setPassword(e.target.value)} type="password" id="password" className={`block w-100 h-10 p-4 ps-10 text-sm text-gray-900 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 ${failLogin ? 'border-2 border-red-600' : 'border border-gray-300'} `} placeholder="alex.morgan@design.com" required />
+              <input onChange={(e) => setPassword(e.target.value)} type={`${viewPassword ? "text" : "password"}`} id="password" className={`block w-100 h-10 p-4 ps-10 text-sm text-gray-900 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 ${failLogin ? 'border-2 border-red-600' : 'border border-gray-300'} `} placeholder="alex.morgan@design.com" required />
 
               <div className='absolute inset-y-0 start-92 flex items-center pe-3 pointer-events-auto'>
-                <img className='w-5 h-5' src="/assets/Eye.svg" alt="" />
+                <img onClick={toggleViewPassword} className='w-5 h-5 cursor-pointer' src={`/assets/${viewPassword ? 'eye-slash.svg' : "Eye.svg"}`}  alt="Toggle to view password" />
               </div>
               </div>
               {failLogin && (
@@ -144,7 +142,7 @@ const FormComponent = () => {
               <Label htmlFor="remember">Keep me signed in</Label>
             </div>
             <div className="place-items-end">
-              <button className="flex a-tag">Forgot Password?</button>
+              <button onClick={handleToggleModal} className="flex a-tag">Forgot Password?</button>
             </div>
           </div>
           <Button onClick={handleSubmit} className="cursor-pointer">Sign In to Dashboard </Button>

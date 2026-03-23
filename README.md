@@ -49,4 +49,6 @@ Add function to test if user is signed in!
 
     Rework error message login to show red text under password with password border red!
 
-    Add a function to hide password and show password when entering!
+    Add a function to hide password and show password when entering! (DONE)!!!
+
+    Add function to update user's password if user forgot. First user must enter both username and email, then they are allowed to change password!
