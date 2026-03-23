@@ -6,6 +6,7 @@ import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
 import ErrorMessageModal from './ErrorMessageModal';
 import CreateAccountModal from './CreateAccountModal';
+import { HiExclamation, HiExclamationCircle } from 'react-icons/hi';
 
 
 const FormComponent = () => {
@@ -13,6 +14,11 @@ const FormComponent = () => {
   const [password, setPassword] = useState("");
 
   const [isRememberMe, setIsRememberMe] = useState<boolean | null>(null);
+  const [isError, setIsError] = useState(false)
+  const [failLogin, setFailLogin] = useState(false)
+  const [message, setMessage] = useState("")
+  // use state to allow user to create an account!
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
 
   const { push } = useRouter();
 
@@ -43,38 +49,33 @@ const FormComponent = () => {
     else { // if token is null!!!
       // add logic to tell user unable to login 
       // alert("insert error modal here")
-      setMessage("Unable to Login, Username/Email or Password may be incorrect!")
-      setIsError(true)
+      // setMessage("Unable to Login, Username/Email or Password may be incorrect!")
+      // setIsError(true)
+      setFailLogin(true);
     }
 
   }
 
-  const [isError, setIsError] = useState(false)
-  const [message, setMessage] = useState("")
 
-  const [isCreateOpen, setIsCreateOpen] = useState(false)
   const handleToggleModal = () => {
     setIsCreateOpen(true);
   }
-  
+
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
-  
-  const toastMessage = (isSuccess: boolean) => {
-    return (isSuccess) ? "Account Created" : "Account Not Created. Username or Email is already in use!";
-  }
+
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
       redirect("/Dashboard")
     }
     console.log("use effect is rendering");
-    if(isSuccess){
-    console.log(isSuccess)
+    if (isSuccess) {
+      console.log(isSuccess)
 
       setMessage("Account creation Successful!")
       setIsError(true)
     }
-    else if(isSuccess != null){
-      setMessage("User creation failed! Email is already in use Or Username is already taken!")
+    else if (isSuccess != null) {
+      setMessage("Account creation failed! Email is already in use Or Username is already taken!")
       setIsError(true)
     }
     console.log(isSuccess)
@@ -96,7 +97,7 @@ const FormComponent = () => {
           <ToastToggle />
         </Toast>
       </div>
-      
+
 
       <Card className="max-w-md">
         <h1 className="text-center font-bold text-3xl pt-6">Sign In</h1>
@@ -120,13 +121,21 @@ const FormComponent = () => {
             </div>
             <div className="relative">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <img src="/assets/Lock-Icon.svg" className="w-4.5 h-4.5" alt="Lock Icon" />
+                <img src="/assets/lock-icon.svg" className="w-4.5 h-4.5" alt="Lock Icon" />
               </div>
-              <input onChange={(e) => setPassword(e.target.value)} type="text" id="password" className="block w-100 h-10 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="alex.morgan@design.com" required />
+
+              <input onChange={(e) => setPassword(e.target.value)} type="password" id="password" className={`block w-100 h-10 p-4 ps-10 text-sm text-gray-900 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 ${failLogin ? 'border-2 border-red-600' : 'border border-gray-300'} `} placeholder="alex.morgan@design.com" required />
+
               <div className='absolute inset-y-0 start-92 flex items-center pe-3 pointer-events-auto'>
                 <img className='w-5 h-5' src="/assets/Eye.svg" alt="" />
               </div>
-            </div>
+              </div>
+              {failLogin && (
+                <div className='flex pt-2'>
+                  <HiExclamationCircle className='me-2 text-red-600' />
+                <p className='text-xs text-red-600'>The password you entered is incorrect. Please try again.</p>
+              </div>
+              )}
           </div>
 
           <div className="grid grid-cols-2">
