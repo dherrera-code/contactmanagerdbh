@@ -32,10 +32,9 @@ export const login = async (user: Login) => {
     });
     console.log(response);
     if(!response.ok){
-        const data = await response.json();
-        console.log(await data)
-        const message = data.message;
-        alert(message);
+        // const data = await response.json();
+        // console.log(await data)
+        // const message = data.message;
         return null;
     }
 

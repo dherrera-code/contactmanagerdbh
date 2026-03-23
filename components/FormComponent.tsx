@@ -4,6 +4,7 @@ import { createAccount, login } from '@/lib/user-services';
 import { Toast, ToastToggle, Card, Label, Checkbox, Button, ModalBody, Modal, ModalHeader, TextInput } from 'flowbite-react'
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
+import ErrorMessageModal from './ErrorMessageModal';
 
 
 const FormComponent = () => {
@@ -29,6 +30,7 @@ const FormComponent = () => {
     }
 
     const token: Token | null = await login(user);
+    console.log(token)
     if (token != null) {
       if (typeof window != null) {
         if (isRememberMe) {
@@ -38,12 +40,18 @@ const FormComponent = () => {
           sessionStorage.setItem("token", token.token);
         }
         push("/Dashboard");
-      } else {
-        alert("Login error! Password no good")
       }
+    }
+    else{ // if token is null!!!
+      // add logic to tell user unable to login 
+        // alert("insert error modal here")
+        setMessage("Unable to Login, Username/Email or Password may be incorrect!")
+        setIsError(true)
     }
 
   }
+  const [isError, setIsError] = useState(false)
+  const [message, setMessage] = useState("")
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
       redirect("/Dashboard")
@@ -85,6 +93,7 @@ const FormComponent = () => {
 
   return (
     <div className='py-5 inter'>
+      <ErrorMessageModal message={message} isOpen={isError} setIsOpen={setIsError} ></ErrorMessageModal>
       <div>
         <Modal show={isOpenModal} size="md" onClose={onCloseModal} popup>
           <ModalHeader />
